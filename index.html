@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dream Store</title>
+    <style>
+        /* ======== CSS STYLES ======== */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #111;
+            color: white;
+            text-align: center;
+        }
+
+        header {
+            background-color: #222;
+            padding: 15px;
+            font-size: 24px;
+        }
+
+        h1 span {
+            color: #6a5acd;
+        }
+
+        .container {
+            margin-top: 20px;
+        }
+
+        .game-list {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .game-item img {
+            width: 100px;
+            border-radius: 10px;
+        }
+
+        .product {
+            margin: 30px;
+            padding: 20px;
+            background: #222;
+            border-radius: 10px;
+        }
+
+        input {
+            width: 80%;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+        }
+
+        .package-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .package-btn {
+            background: #6a5acd;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #whatsapp-order {
+            margin-top: 20px;
+            background: green;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <h1>DREAM<span>STORE</span></h1>
+    </header>
+
+    <!-- GAME LIST -->
+    <section class="container"
+                
+
+    <!-- PRODUCT SELECTION -->
+    <section class="product">
+        <h2>MLBB DIAMOND PACKS </h2
+
+        <label for="user-id">Enter User ID:</label>
+        <input type="text" id="user-id" placeholder="Enter your User ID">
+        
+        <label for="zone-id">Enter Zone ID:</label>
+        <input type="text" id="zone-id" placeholder="Enter your Zone ID">
+
+        <h3>Select Package</h3>
+        <div class="package-list">
+            <button class="package-btn" data-package="86 Diamonds">86 Diamonds</button>
+            <button class="package-btn" data-package="172 Diamonds">172 Diamonds</button>
+            <button class="package-btn" data-package="257 Diamonds">257 Diamonds</button>
+            <button class="package-btn" data-package="429 Diamonds">429 Diamonds</button>
+            <button class="package-btn" data-package="Weekly Pass">Weekly Pass</button>
+        </div>
+
+        <button id="whatsapp-order">Order on WhatsApp</button>
+    </section>
+
+    <script>
+        // ======== JAVASCRIPT FUNCTIONALITY ========
+        document.addEventListener("DOMContentLoaded", () => {
+            let selectedPackage = "";
+
+            // Package selection
+            document.querySelectorAll(".package-btn").forEach((button) => {
+                button.addEventListener("click", function () {
+                    selectedPackage = this.getAttribute("data-package");
+
+                    // Reset all button colors
+                    document.querySelectorAll(".package-btn").forEach(btn => btn.style.background = "#6a5acd");
+
+                    // Highlight selected button
+                    this.style.background = "purple"; 
+                });
+            });
+
+            // WhatsApp Order Button Click
+            document.getElementById("whatsapp-order").addEventListener("click", function () {
+                const userId = document.getElementById("user-id").value;
+                const zoneId = document.getElementById("zone-id").value;
+
+                // Validation
+                if (!userId || !zoneId || !selectedPackage) {
+                    alert("Please enter User ID, Zone ID, and select a package.");
+                    return;
+                }
+
+                // WhatsApp Message Formatting
+                const message = `Hello, I want to buy ${selectedPackage} for Mobile Legends.
+                - User ID: ${userId}
+                - Zone ID: ${zoneId}`;
+
+                // Redirect to WhatsApp with pre-filled message
+                const whatsappUrl = `https://wa.me/9362818826?text=${encodeURIComponent(message)}`;
+                window.location.href = whatsappUrl;
+            });
+        });
+    </script>
+
+</body>
+</html>
